@@ -9,9 +9,11 @@ def calcolaEta(birthDate):
     birth = datetime.date(int(birthDate[0:4]), int(birthDate[5:7]), int(birthDate[8:]))
     return int((today - birth).total_seconds()//31536000)
 
-
 resultPar = {}; resultDef = {}; teamsId = {}
 barplotList = [[], []]
+
+# this is the part of the assignment where we have to create the barplot in which we show the distribution of the
+# ages of the coaches
 
 # import and parsing files
 teams = open("C:\\Users\\asus\\Desktop\\Algoritmic methods for data science\\HM2\\file json\\teams.json")
@@ -55,10 +57,27 @@ for ages in resultDef.values():
         else:
             barplotList[1][barplotList[0].index(el)] += 1
 
-print(resultDef)
 # showing the results
 plt.xlabel("Age")
 plt.ylabel("Number")
-plt.bar(barplotList[0], barplotList[1])
+plt.bar(barplotList[0], barplotList[1], width=0.25)
 plt.show()
 
+# this is the part where I show the ten teams with the youngest coaches
+result = {}
+
+#
+for sq, coach_ages in resultDef.items():
+    if len(result) < 10:
+        result[sq] = min(coach_ages)
+    else:
+        if min(coach_ages) <  max(result.values()):
+            result[sq] = min(coach_ages)
+            for key, value in result.items():
+                if value == max(result.values()):
+                    keyElRem = key
+            result.pop(keyElRem)
+
+# printing result
+for key in result.keys():
+    print(key)
