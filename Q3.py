@@ -66,7 +66,7 @@ plt.show()
 # this is the part where I show the ten teams with the youngest coaches
 result = {}
 
-#
+# i find and insert the ten team with the youngest coaches
 for sq, coach_ages in resultDef.items():
     if len(result) < 10:
         result[sq] = min(coach_ages)
